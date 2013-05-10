@@ -110,7 +110,7 @@ fi
 function gvim () { (/usr/bin/gvim -f "$@" &) }
 
 #DJANGO_SETTINGS
-DJANGO_SECRET_KEY='asdfjapc9498wr5*(#$@#$!FSfasfa'
+export DJANGO_SECRET_KEY='asdfjapc9498wr5*(#$@#$!FSfasfa'
 
 #VIRTUAL_ENV
 export WORKON_HOME=~/venvs
