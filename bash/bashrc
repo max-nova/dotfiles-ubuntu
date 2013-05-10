@@ -109,6 +109,9 @@ fi
 #FOR VIM
 function gvim () { (/usr/bin/gvim -f "$@" &) }
 
+#DJANGO_SETTINGS
+DJANGO_SECRET_KEY='asdfjapc9498wr5*(#$@#$!FSfasfa'
+
 #VIRTUAL_ENV
 export WORKON_HOME=~/venvs
 source /usr/local/bin/virtualenvwrapper.sh
@@ -126,7 +129,7 @@ export GIS_LOCK=$$
 export PYTHONPATH=$PYTHONPATH:$GISBASE/etc/python/
 
 #Load secret variables if exist
-if [ -f /home/max/Dropbox/Private/Personal/Accounts/bash_secret ]; then
-    source /home/max/Dropbox/Private/Personal/Accounts/bash_secret
+if [ -f /home/max/Desktop/Dropbox/Private/Personal/Accounts/bash_secret ]; then
+    source /home/max/Desktop/Dropbox/Private/Personal/Accounts/bash_secret
 fi
 
