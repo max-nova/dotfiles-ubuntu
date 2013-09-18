@@ -129,7 +129,7 @@ export GIS_LOCK=$$
 export PYTHONPATH=$PYTHONPATH:$GISBASE/etc/python/
 
 #Load secret variables if exist
-if [ -f /home/max/Desktop/Dropbox/Private/Personal/Accounts/bash_secret ]; then
-    source /home/max/Desktop/Dropbox/Private/Personal/Accounts/bash_secret
+if [ -f /home/max/Desktop/Dropbox/Personal/Accounts/bash_secret ]; then
+    source /home/max/Desktop/Dropbox/Personal/Accounts/bash_secret
 fi
 
