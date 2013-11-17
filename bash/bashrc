@@ -109,6 +109,9 @@ fi
 #FOR VIM
 function gvim () { (/usr/bin/gvim -f "$@" &) }
 
+#FOR GREP
+export GREP_OPTIONS='--exclude=*.pyc --exclude=*.swp --exclude-dir=htmlcov'
+
 #DJANGO_SETTINGS
 export DJANGO_SECRET_KEY='asdfjapc9498wr5*(#$@#$!FSfasfa'
 
