@@ -1,0 +1,27 @@
+#coverage
+alias go-coverage='coverage run manage.py test && coverage report'
+
+#ST WEB
+alias runserver_web='cd ~/workspace/st_web && python manage.py runserver_plus 0.0.0.0:8002'
+alias shell_web='cd ~/workspace/st_web && python manage.py shell'
+alias test_web='python manage.py test $(python -c "import settings; print \" \".join(settings.MY_APPS)")'
+
+#ST WORKER
+alias runserver_worker='cd ~/workspace/st_worker && python manage.py runserver_plus 0.0.0.0:8001'
+alias shell_worker='cd ~/workspace/st_worker && python manage.py shell'
+
+#KUDZU
+alias test_kudzu='cd ~/workspace/kudzu_tools && python -m unittest discover'
+
+#PLOT HOUND DEV SHORTCUT
+alias ph_browser='chromium-browser --allow-file-access-from-files &'
+alias pgb='python ~workspace/kudzu_tools/apps/ph/scripts/package4phonegap.py -td ~/workspace/plot_hound_www_max/ && python ~workspace/kudzu_tools/apps/ph/scripts/upload2phonegap.py -f /tmp/plot_hound_app.zip'
+
+#DATABASE RESTORE
+alias st_web_restore='export KUDZU_ENVIRON=ST_WEB_ENVIRON && export KUDZU_DEBUG=False && cd ~/workspace/st_web && python ~/workspace/st_web/scripts/restore_from_latest_backup.py'
+alias st_worker_restore='export KUDZU_ENVIRON=ST_WORKER_ENVIRON && export KUDZU_DEBUG=False && cd ~/workspace/st_worker && python ~/workspace/st_worker/scripts/restore_from_latest_backup.py'
+
+#ENVIRONMENTS
+alias ec2_environ='export KUDZU_ENVIRON=EC2_ENVIRON && export KUDZU_DEBUG=False && export HYDRA_DEBUG=False'
+alias venv_st_web='source ~/virtualenvs/st_web/bin/activate && cd ~/workspace/st_web'
+alias venv_st_worker='source ~/virtualenvs/st_worker/bin/activate && cd ~/workspace/st_worker'
