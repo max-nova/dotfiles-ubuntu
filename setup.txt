@@ -1,0 +1,209 @@
+===================
+Computer Setup
+===================
+
+Set up dual monitors
+-------------------
+ * Adjust resolutions
+ * Launcher placement: only on laptop
+ * Appearance -> Auto-hide launcher
+
+Download and install Dropbox
+-------------------
+ * Put Dropbox folder on Desktop
+
+Download and install Chrome
+-------------------
+ * Sync Accounts
+ * Sync SpeedDial
+ * Install Google Talk plugin from google website
+
+Get updates
+-------------------
+ * Download all updates from Update Manager
+ * Install any restricted drivers
+ * Probably restart for changes to take effect
+
+Launcher
+-------------------
+ * Remove cruft
+ * Add Chrome, Text Editor
+
+Mouse
+-------------------
+ * Max out sensitivity
+ * Put acceleration at ~75%
+
+Clock Appearance
+-------------------
+ * Add day and date to display
+
+Brightness and Lock
+-------------------
+Turn screen off when inactive for: 1 hour
+
+Set up Terminal
+-------------------
+ * Green on black color scheme
+ * Set Title keyboard shortcut: Ctrl-Shift-i
+
+Remove overlay scrollbars (optional)
+-------------------
+sudo apt-get remove overlay-scrollbar liboverlay-scrollbar3-0.2-0 liboverlay-scrollbar-0.2-0
+ * Log out and then log back in
+
+Install LibreOffice Global Menu
+--------------------
+sudo apt-get install lo-menubar
+
+Install indicator applets
+-------------------
+ * Weather
+sudo add-apt-repository -y ppa:atareao/atareao && sudo apt-get update
+sudo apt-get -y install my-weather-indicator
+ * System indicator
+ * Change ordering of applets: (optional)
+http://www.webupd8.org/2011/06/how-to-change-application-indicators.html
+
+Keyboard shortcuts for window management
+----------------------
+ * In CompizConfig, enable the "Put" plugin and set the "Put to Next Output" and "Restore Position" to <Control><Primary><Alt><Super>Right and <Control><Primary><Alt><Super>Left, respectively
+
+
+Install Useful Programs
+-------------------
+ * Personal
+sudo apt-get -y install vim vim-gnome gimp htop chromium-browser compizconfig-settings-manager vlc ubuntu-restricted-extras synaptic
+
+* Python
+sudo apt-get -y install python-pip
+sudo pip install ipython virtualenv virtualenvwrapper
+sudo apt-get -y install ipython-notebook
+
+* Flash and Skype
+sudo apt-add-repository -y "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo apt-get update && sudo apt-get -y install flashplugin-installer acroread skype
+
+ * Codecs
+sudo apt-get -y install hal libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321
+
+* Google Music Manager - download from https://play.google.com/music/listen#/manager
+
+* Google Earth
+sudo apt-get -y install googleearth-package gdebi-core
+make-googleearth-package --force
+sudo gdebi googleearth*.deb
+
+* For silviaterra
+ * version control
+sudo apt-get -y install curl subversion git mercurial subversion
+ * PostGIS
+sudo add-apt-repository -y ppa:ubuntugis/ppa && sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get -y install postgresql postgis postgresql-9.1-postgis
+ * Geo tools
+sudo apt-get -y install gdal-bin qgis libproj0 libproj-dev proj libgdal1-dev libgeos-dev
+ * Python tools
+sudo apt-get -y install ec2-api-tools python-dev python-gdal postgresql-server-dev-9.1
+sudo pip install psycopg2 boto xlrd pandas numpy
+ * R
+sudo apt-get -y install unixODBC odbc-postgresql r-base r-cran-rodbc r-cran-mass  glpk 
+
+Generate ssh key
+-------------------
+ * https://help.github.com/articles/generating-ssh-keys
+ * Add to github
+
+Set up SSH login for servers
+--------------------
+ssh-copy-id "user@host -p port"
+
+Setup workspace
+-------------------
+mkdir ~/venvs && mkdir ~/workspace
+
+#custom vim stuff
+sudo pip install pyflakes pep8 rope
+sudo apt-get -y install rake
+cd ~/workspace && git clone https://github.com/uhlenhuthm/dotfiles.git && cd dotfiles && ./install.sh vim
+cd ~/workspace && git clone https://github.com/uhlenhuthm/dotfiles-ubuntu.git && cd dotfiles-ubuntu/ && ./install.sh
+
+cd ~/workspace
+git clone git@github.com:SilviaTerra/st_web.git
+git clone git@github.com:SilviaTerra/st_worker.git
+git clone git@github.com:SilviaTerra/kudzu_tools.git
+git clone git@github.com:SilviaTerra/hydra.git
+git clone git@github.com:SilviaTerra/plot_hound.git
+git clone git@github.com:SilviaTerra/kudzu_hacks.git
+
+Link libraries
+-------------------
+sudo ln -s ~/workspace/kudzu_tools/ /usr/local/lib/python2.7/dist-packages/kudzu_tools
+sudo ln -s ~/workspace/hydra/ /usr/local/lib/python2.7/dist-packages/hydra
+sudo ln -s ~/workspace/kudzu_hacks/ /usr/local/lib/python2.7/dist-packages/kudzu_hacks
+
+sudo ln -s ~/workspace/kudzu_tools/ /opt/kudzu_tools
+sudo ln -s ~/workspace/hydra/ /opt/hydra
+sudo ln -s ~/workspace/kudzu_hacks/ /opt/kudzu_hacks
+
+Setup virtual environments
+-------------------
+mkvirtualenv st_web && ln -s /usr/lib/python2.7/dist-packages/osgeo $VIRTUAL_ENV/lib/python2.7/site-packages/osgeo && pip install -r ~/workspace/st_web/requirements.txt
+ln -s /opt/kudzu_tools $VIRTUAL_ENV/lib/python2.7/site-packages/kudzu_tools
+ln -s /opt/hydra $VIRTUAL_ENV/lib/python2.7/site-packages/hydra
+ln -s /opt/kudzu_hacks $VIRTUAL_ENV/lib/python2.7/site-packages/kudzu_hacks
+echo 'export KUDZU_DB=st_web && export KUDZU_DB_USER=silviaterra && export KUDZU_DB_PASSWORD=temp123' >> $VIRTUAL_ENV/bin/postactivate
+deactivate
+
+mkvirtualenv st_worker && ln -s /usr/lib/python2.7/dist-packages/osgeo $VIRTUAL_ENV/lib/python2.7/site-packages/osgeo && pip install -r ~/workspace/st_worker/requirements.txt
+ln -s /opt/kudzu_tools $VIRTUAL_ENV/lib/python2.7/site-packages/kudzu_tools
+ln -s /opt/hydra $VIRTUAL_ENV/lib/python2.7/site-packages/hydra
+ln -s /opt/kudzu_hacks $VIRTUAL_ENV/lib/python2.7/site-packages/kudzu_hacks
+echo 'export KUDZU_DB=st_worker && export KUDZU_DB_USER=silviaterra && export KUDZU_DB_PASSWORD=temp123' >> $VIRTUAL_ENV/bin/postactivate
+deactivate
+
+Setup Databases
+-------------------
+sudo su postgres
+createuser -d -s -R -P silviaterra
+ * temp123
+
+ * for st_web, st_worker, and timberscout:
+createdb st_web
+psql -d st_web -c "CREATE EXTENSION postgis;"
+psql -d st_web -c "CREATE EXTENSION postgis_topology;"
+
+sudo nano /etc/postgresql/9.1/main/pg_hba.conf
+#change local auth to from "peer" to "md5"
+
+echo 'localhost:5432:st_web:silviaterra:temp123' >> ~/.pgpass
+echo 'localhost:5432:st_worker:silviaterra:temp123' >> ~/.pgpass
+
+AWS
+-------------------
+ * create ~/aws
+ * copy in cert, ec2-keypair.pem, and pk files
+chmod 600 ~/aws/*
+
+################################
+### Optional / Special Cases ###
+################################
+
+playing movies on Google Play
+-------------------
+http://askubuntu.com/questions/166760/how-do-i-play-movies-on-google-play
+
+screen freezing after locking computer
+-------------------
+ * In CompizConfig, go to OpenGL plug-in & uncheck the Sync to VBlank option
+
+wifi dropping all the time
+-------------------
+sudo nano /etc/NetworkManager/NetworkManager.conf
+sudo service network-manager restart
+
+Broken pipes
+----------------------
+nano /etc/ssh/ssh_config 
+    ServerAliveInterval 30
+
+
